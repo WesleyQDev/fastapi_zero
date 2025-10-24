@@ -21,3 +21,18 @@ def test_root_deve_retornar_ola_mundo():
     # Assert
     assert response.json() == {'message': 'Olá mundo!'}
     assert response.status_code == HTTPStatus.OK
+
+
+def test_landing_page_deve_retornar_html():
+    """
+    Testa se a landing page retorna o HTML esperado
+    """
+    # Arrange
+    client = TestClient(app)
+
+    # Act
+    response = client.get('/landing-page')
+
+    # Assert
+    assert response.status_code == HTTPStatus.OK
+    assert '<h1>Welcome to the Landing Page</h1>' in response.text
